@@ -35,13 +35,13 @@ public:
         return parents[vertex] = disjoint_set_union_find(parents[vertex]);
     }
     
-    void disjoin_set_union_merge(int v1, int v2) {
+    void disjoint_set_union_merge(int v1, int v2) {
         int r1 = disjoint_set_union_find(v1);
         int r2 = disjoint_set_union_find(v2);
         if (r1 != r2) {
             if (size[r1] < size[r2]) { swap(r1, r2); }
             parents[r2] = r1;
-            size[r2] += size[r1];
+            size[r1] += size[r2];
         }
     }
     
@@ -54,7 +54,7 @@ public:
             tie(weight, start, finish) = edge;
             if (disjoint_set_union_find(start) != disjoint_set_union_find(finish)) {
                 answer += weight;
-                disjoin_set_union_merge(start, finish);
+                disjoint_set_union_merge(start, finish);
             }
         }
         cout << answer;
